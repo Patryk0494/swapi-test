@@ -1,56 +1,130 @@
 @import "./variables.module.scss";
-
 @mixin center-items {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.page-background {
-  height: 100vh;
-  width: 100vw;
-  background: radial-gradient(
-    ellipse at bottom,
-    $primary-color 0%,
-    $gradient-color2 35%,
-    $gradient-color3 100%
-  );
-}
-
-.landingpage {
-  @include center-items;
-  height: 100vh;
-  width: 100vw;
-  color: $secondary-color;
-  &__box {
-    @include center-items;
-    width: 80%;
-    height: 80%;
+@mixin glassomorphic {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.3);
     box-shadow: 5px 8px 8px 5px rgba(31, 38, 135, 0.5);
     backdrop-filter: blur(7px);
     -webkit-backdrop-filter: blur(7px);
-  }
-  &__link {
-    padding: 1rem 2rem;
-  }
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.page-background {
+    height: 100vh;
+    width: 100vw;
+    background: radial-gradient( ellipse at bottom, $primary-color 0%, $gradient-color2 35%, $gradient-color3 100%);
+    background-attachment: fixed;
+    overflow: scroll;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media (min-width: 1040px) {
+    .container {
+        width: 90%;
+        max-width: 1200px;
+    }
+}
+
+.landingpage {
+    @include center-items;
+    height: 100vh;
+    width: 100vw;
+    color: $secondary-color;
+    &__box {
+        @include center-items;
+        @include glassomorphic;
+        width: 80%;
+        height: 80%;
+    }
+    &__link {
+        padding: 1rem 2rem;
+    }
+}
+
+.planets {
+    &__container {
+        margin: 1rem auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    &__item {
+        @include glassomorphic;
+        width: 90%;
+        padding-bottom: 90%;
+        margin-bottom: 5%;
+        position: relative;
+        color: $secondary-color;
+    }
+    &__content {
+        @include center-items;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+    &__link {
+        width: 100%;
+        padding: calc(50% - 0.75rem) 0;
+        font-size: 2rem;
+        line-height: 1.5rem;
+        text-align: center;
+        position: absolute;
+    }
+    @media (min-width: 640px) {
+        &__container {
+            gap: 4%;
+        }
+        &__item {
+            width: 48%;
+            padding-bottom: 48%;
+        }
+    }
+    @media (min-width: 1040px) {
+        &__container {
+            margin: 2rem auto;
+            gap: 5%;
+        }
+        &__item {
+            width: 30%;
+            padding-bottom: 30%;
+        }
+    }
+}
+
+.planet {
+    &__props {
+        font-weight: normal;
+        color: $secondary-color;
+    }
 }

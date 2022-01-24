@@ -48,31 +48,28 @@ const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
   });
 
   return (
-    <div>
-      <main>
-        {planetsWithId.map(({ name, id }) => (
-          <div key={`${name}`}>
-            <a href={`/planet/${id}`}>{name}</a>
+    <div className="page-background">
+      <main className="container">
+        <section className="planets">
+          <div className="planets__container">
+            {planetsWithId.map(({ name, id }) => (
+              <div key={`${name}`} className="planets__item">
+                <div className="planets__content">
+                  <a className="planets__link" href={`/planet/${id}`}>
+                    {name}
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </section>
+        <Pagination
+          previousPage={previousPage}
+          nextPage={nextPage}
+          pages={pages}
+          handlePageClick={handlePageClick}
+        />
       </main>
-      {/* <Link href={`/planets/${previousPage}`}>Previous</Link>
-      {pages.map((page) => (
-        <button
-          key={page}
-          onClick={() => handlePageClick(event)}
-          id={page.toString()}
-        >
-          {page}
-        </button>
-      ))}
-      <Link href={`/planets/${nextPage}`}>Next</Link> */}
-      <Pagination
-        previousPage={previousPage}
-        nextPage={nextPage}
-        pages={pages}
-        handlePageClick={handlePageClick}
-      />
     </div>
   );
 };

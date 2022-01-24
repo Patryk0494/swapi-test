@@ -1,0 +1,11 @@
+$primary-color: rgb(0, 12, 100);
+$secondary-color: white;
+$gradient-color2: rgba(14, 14, 85, 1);
+$gradient-color3: rgba(0, 0, 0, 1) 100%;
+
+:export {
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  gradient-color2: $gradient-color2;
+  gradient-color3: $gradient-color3;
+}

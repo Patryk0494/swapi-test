@@ -1,0 +1,56 @@
+@import "./variables.module.scss";
+
+@mixin center-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page-background {
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(
+    ellipse at bottom,
+    $primary-color 0%,
+    $gradient-color2 35%,
+    $gradient-color3 100%
+  );
+}
+
+.landingpage {
+  @include center-items;
+  height: 100vh;
+  width: 100vw;
+  color: $secondary-color;
+  &__box {
+    @include center-items;
+    width: 80%;
+    height: 80%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 5px 8px 8px 5px rgba(31, 38, 135, 0.5);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+  }
+  &__link {
+    padding: 1rem 2rem;
+  }
+}

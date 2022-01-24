@@ -4,16 +4,16 @@ import Router from "next/router";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import getPagesNumbers from "../../utils/getPagesNumbers";
+import { NextPage } from "next";
+import Pagination from "../../components/Pagination";
 
 const API_URL = "https://swapi.dev/api/";
 
 interface PlanetsComponentProps {
-  props: { data: PlanetsI; page: number };
+  props: { data: PlanetsI };
 }
 
-export default function PlanetsPage({
-  props: { data },
-}: PlanetsComponentProps) {
+const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
   const {
     query: { page },
   } = useRouter();
@@ -53,11 +53,10 @@ export default function PlanetsPage({
         {planetsWithId.map(({ name, id }) => (
           <div key={`${name}`}>
             <a href={`/planet/${id}`}>{name}</a>
-            <span>{id}</span>
           </div>
         ))}
       </main>
-      <Link href={`/planets/${previousPage}`}>Previous</Link>
+      {/* <Link href={`/planets/${previousPage}`}>Previous</Link>
       {pages.map((page) => (
         <button
           key={page}
@@ -67,10 +66,16 @@ export default function PlanetsPage({
           {page}
         </button>
       ))}
-      <Link href={`/planets/${nextPage}`}>Next</Link>
+      <Link href={`/planets/${nextPage}`}>Next</Link> */}
+      <Pagination
+        previousPage={previousPage}
+        nextPage={nextPage}
+        pages={pages}
+        handlePageClick={handlePageClick}
+      />
     </div>
   );
-}
+};
 
 // export const getStaticPaths = async () => {
 //   const respone = await fetch(`${API_URL}/planets`);
@@ -105,3 +110,5 @@ PlanetsPage.getInitialProps = async (ctx: any) => {
     props: { data },
   };
 };
+
+export default PlanetsPage;

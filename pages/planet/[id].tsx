@@ -3,10 +3,10 @@ import { PlanetI } from "../../model/Planets";
 
 const API_URL = "https://swapi.dev/api/";
 interface PlanetProps {
-  props: { planet: PlanetI; statusCode: number };
+  props: { planet: PlanetI };
 }
 
-const Planet: NextPage<PlanetProps> = ({ props: { planet, statusCode } }) => {
+const Planet: NextPage<PlanetProps> = ({ props: { planet } }) => {
   const {
     climate,
     diameter,
@@ -71,7 +71,7 @@ const Planet: NextPage<PlanetProps> = ({ props: { planet, statusCode } }) => {
           </section>
         ) : (
           <div>
-            <p className="">Error code {statusCode}. Try to reload the page.</p>
+            <p className="">Error. Try to reload the page.</p>
           </div>
         )}
       </main>
@@ -83,10 +83,9 @@ Planet.getInitialProps = async ({ query: { id } }) => {
   try {
     const respone = await fetch(`${API_URL}/planets/${id}`);
     const planet = await respone.json();
-    return { props: { planet, statusCode } };
+    return { props: { planet } };
   } catch (error) {
-    const statusCode = respone.status;
-    return { props: { planet: null, statusCode } };
+    return { props: { planet: null } };
   }
 };
 

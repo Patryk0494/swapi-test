@@ -1,40 +1,59 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 interface PaginationProps {
   previousPage: number;
   nextPage: number;
   pages: number[];
-  handlePageClick: Function;
 }
 
 export default function Pagination({
   previousPage,
   nextPage,
   pages,
-  handlePageClick,
 }: PaginationProps): JSX.Element {
+  const router = useRouter();
+
   const PagesButtons = () => {
     return (
       <React.Fragment>
         {pages.map((page) => (
-          <button
-            key={page}
-            onClick={() => handlePageClick(event)}
-            id={page.toString()}
-          >
-            {page}
-          </button>
+          <Link href={`/planets/${page}`} key={page.toString()}>
+            <a
+              className={
+                router.asPath == `/planets/${page}` ? "active-page" : ""
+              }
+            >
+              {page}
+            </a>
+          </Link>
         ))}
       </React.Fragment>
     );
   };
 
   return (
-    <div>
-      <Link href={`/planets/${previousPage}`}>Previous</Link>
+    <div className="pagination">
+      {previousPage >= 1 ? (
+        <Link href={`/planets/${previousPage}`}>
+          <a>Previous</a>
+        </Link>
+      ) : (
+        <Link href={`/planets/${previousPage}`}>
+          <a className="disabled-link">Previous</a>
+        </Link>
+      )}
       <PagesButtons />
-      <Link href={`/planets/${nextPage}`}>Next</Link>
+      {nextPage <= pages.length ? (
+        <Link href={`/planets/${nextPage}`}>
+          <a>Next</a>
+        </Link>
+      ) : (
+        <Link href={`/planets/${nextPage}`}>
+          <a className="disabled-link">Next</a>
+        </Link>
+      )}
     </div>
   );
 }

@@ -1,130 +1,218 @@
 @import "./variables.module.scss";
+@font-face {
+  font-family: StarJedi;
+  src: url(../assets/fonts/Starjedi.ttf);
+}
 @mixin center-items {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin glassomorphic {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 5px 8px 8px 5px rgba(31, 38, 135, 0.5);
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 3px 8px 2px $shadow-color;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
 }
+
+$text-shadow: 0px 0px 5px $shadow-color;
 
 html,
 body {
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, StarJedi, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  letter-spacing: 0.2em;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .page-background {
-    height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(
+    ellipse at bottom,
+    $primary-color 0%,
+    $gradient-color2 35%,
+    $gradient-color3 100%
+  );
+  background-attachment: fixed;
+  overflow: scroll;
+  &::before {
+    content: "";
     width: 100vw;
-    background: radial-gradient( ellipse at bottom, $primary-color 0%, $gradient-color2 35%, $gradient-color3 100%);
-    background-attachment: fixed;
-    overflow: scroll;
+    height: 100vh;
+    position: absolute;
+    background-image: url(../assets/sw.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-blend-mode: multiply;
+  }
 }
 
 .container {
-    width: 100%;
-    margin: 0 auto;
+  @include glassomorphic;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 640px) {
-    .container {
-        width: 95%;
-    }
+  .container {
+    width: 95%;
+  }
 }
 
 @media (min-width: 1040px) {
-    .container {
-        width: 90%;
-        max-width: 1200px;
-    }
+  .container {
+    width: 90%;
+    max-width: 1200px;
+  }
 }
 
 .landingpage {
+  @include center-items;
+  height: 100vh;
+  width: 100vw;
+  color: $secondary-color;
+  &__box {
     @include center-items;
-    height: 100vh;
-    width: 100vw;
-    color: $secondary-color;
-    &__box {
-        @include center-items;
-        @include glassomorphic;
-        width: 80%;
-        height: 80%;
+    @include glassomorphic;
+    width: 80%;
+    height: 80%;
+  }
+  &__link {
+    @include glassomorphic;
+    font-size: 3rem;
+    padding: 1rem 2rem;
+    transition: all 0.3s;
+    &:hover {
+      transform: scale(1.1);
     }
-    &__link {
-        padding: 1rem 2rem;
-    }
+  }
 }
 
 .planets {
+  &__container {
+    margin: 1rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  &__item {
+    @include glassomorphic;
+    width: 90%;
+    padding-bottom: 90%;
+    margin-bottom: 5%;
+    position: relative;
+    color: $secondary-color;
+  }
+  &__content {
+    @include center-items;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  &__link {
+    width: 100%;
+    padding: calc(50% - 0.75rem) 0;
+    font-size: 2rem;
+    line-height: 1.5rem;
+    text-align: center;
+    position: absolute;
+  }
+  @media (min-width: 640px) {
     &__container {
-        margin: 1rem auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+      gap: 4%;
     }
     &__item {
-        @include glassomorphic;
-        width: 90%;
-        padding-bottom: 90%;
-        margin-bottom: 5%;
-        position: relative;
-        color: $secondary-color;
+      width: 48%;
+      padding-bottom: 48%;
     }
-    &__content {
-        @include center-items;
-        width: 100%;
-        height: 100%;
-        position: absolute;
+  }
+  @media (min-width: 1040px) {
+    &__container {
+      margin: 2rem auto;
+      gap: 5%;
     }
-    &__link {
-        width: 100%;
-        padding: calc(50% - 0.75rem) 0;
-        font-size: 2rem;
-        line-height: 1.5rem;
-        text-align: center;
-        position: absolute;
+    &__item {
+      width: 30%;
+      padding-bottom: 30%;
+      transition: all 0.2s;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
-    @media (min-width: 640px) {
-        &__container {
-            gap: 4%;
-        }
-        &__item {
-            width: 48%;
-            padding-bottom: 48%;
-        }
-    }
-    @media (min-width: 1040px) {
-        &__container {
-            margin: 2rem auto;
-            gap: 5%;
-        }
-        &__item {
-            width: 30%;
-            padding-bottom: 30%;
-        }
-    }
+  }
 }
 
 .planet {
-    &__props {
-        font-weight: normal;
-        color: $secondary-color;
+  height: 100vh;
+  &__props {
+    font-size: 1rem;
+    font-weight: normal;
+    color: $secondary-color;
+  }
+  &__props-value {
+    font-size: 1rem;
+    text-shadow: $text-shadow;
+  }
+  @media (min-width: 640px) {
+    &__props-value {
+      font-size: 1.5rem;
     }
+    &__props {
+      font-size: 1.5rem;
+    }
+  }
+  @media (min-width: 1040px) {
+    &__props-value {
+      font-size: 2rem;
+    }
+  }
+}
+
+.pagination {
+  margin: 1.5rem auto;
+  color: $secondary-color;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1rem;
+  & a {
+    transition: all 0.4s;
+    &:hover {
+      transform: scale(1.1);
+      text-shadow: $text-shadow;
+    }
+  }
+}
+@media (min-width: 640px) {
+  .pagination {
+    font-size: 1.5rem;
+    justify-content: center;
+  }
+}
+
+.active-page {
+  transform: scale(1.1);
+  text-shadow: $text-shadow;
+}
+
+.disabled-link {
+  pointer-events: none;
+  color: rgb(95, 95, 95);
 }

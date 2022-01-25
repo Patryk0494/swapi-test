@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 
 const Home: NextPage = () => {
@@ -15,12 +14,10 @@ const Home: NextPage = () => {
         <meta name="keywords" content="Star Wars, Star, Wars, planets, " />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="landingpage">
-        <div className="landingpage__box">
-          <Link href="/planets/1">
-            <a className="landingpage__link">PLANETS</a>
-          </Link>
-        </div>
+      <div className="landingpage container">
+        <Link href="/planets/1">
+          <a className="landingpage__link">PLANETS</a>
+        </Link>
       </div>
     </div>
   );

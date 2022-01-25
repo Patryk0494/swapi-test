@@ -26,12 +26,8 @@ const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
   const [previousPage, setPreviousPage] = useState<number>(1);
 
   useEffect(() => {
-    if (countPage > currentPage) {
-      setNextPage(currentPage + 1);
-    }
-    if (currentPage > 1) {
-      setPreviousPage(currentPage - 1);
-    }
+    setNextPage(currentPage + 1);
+    setPreviousPage(currentPage - 1);
   }, [currentPage, countPage]);
 
   const handlePageClick = (event: any) => {
@@ -67,42 +63,20 @@ const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
           previousPage={previousPage}
           nextPage={nextPage}
           pages={pages}
-          handlePageClick={handlePageClick}
         />
       </main>
     </div>
   );
 };
 
-// export const getStaticPaths = async () => {
-//   const respone = await fetch(`${API_URL}/planets`);
-//   const { count } = await respone.json();
-//   const paths = getPagesNumbers(count).map((page) => {
-//     return { params: { planets: "planets", page: page.toString() } };
-//   });
-//   return {
-//     fallback: true,
-//     paths,
-//   };
-// };
-
-// export const getStaticProps = async (ctx: any) => {
-//   const {
-//     params: { page },
-//   } = ctx;
-//   const respone = await fetch(`${API_URL}/planets/?page=${page}`);
-//   const data = await respone.json();
-//   return {
-//     props: { data },
-//   };
-// };
-
 PlanetsPage.getInitialProps = async (ctx: any) => {
   const {
     query: { page },
   } = ctx;
+
   const respone = await fetch(`${API_URL}/planets/?page=${page}`);
   const data = await respone.json();
+
   return {
     props: { data },
   };

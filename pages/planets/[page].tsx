@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 import { PlanetsI } from "../../model/Planets";
-import Router from "next/router";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import getPagesNumbers from "../../utils/getPagesNumbers";
 import { NextPage } from "next";
@@ -30,10 +28,6 @@ const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
     setPreviousPage(currentPage - 1);
   }, [currentPage, countPage]);
 
-  const handlePageClick = (event: any) => {
-    Router.push(`${event.target.id}`);
-  };
-
   const planets = data.results;
 
   const planetsWithId = planets.map((planet) => {
@@ -46,24 +40,32 @@ const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
   return (
     <div className="page-background">
       <main className="container">
-        <section className="planets">
-          <div className="planets__container">
-            {planetsWithId.map(({ name, id }) => (
-              <div key={`${name}`} className="planets__item">
-                <div className="planets__content">
-                  <a className="planets__link" href={`/planet/${id}`}>
-                    {name}
-                  </a>
-                </div>
+        {data ? (
+          <>
+            <section className="planets">
+              <div className="planets__container">
+                {planetsWithId.map(({ name, id }) => (
+                  <div key={`${name}`} className="planets__item">
+                    <div className="planets__content">
+                      <a className="planets__link" href={`/planet/${id}`}>
+                        {name}
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </section>
+            <Pagination
+              previousPage={previousPage}
+              nextPage={nextPage}
+              pages={pages}
+            />
+          </>
+        ) : (
+          <div>
+            <p>Error. Try to reload the page.</p>
           </div>
-        </section>
-        <Pagination
-          previousPage={previousPage}
-          nextPage={nextPage}
-          pages={pages}
-        />
+        )}
       </main>
     </div>
   );
@@ -74,12 +76,16 @@ PlanetsPage.getInitialProps = async (ctx: any) => {
     query: { page },
   } = ctx;
 
-  const respone = await fetch(`${API_URL}/planets/?page=${page}`);
-  const data = await respone.json();
+  try {
+    const respone = await fetch(`${API_URL}/planets/?page=${page}`);
+    const data = await respone.json();
 
-  return {
-    props: { data },
-  };
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    return { props: { data: null } };
+  }
 };
 
 export default PlanetsPage;

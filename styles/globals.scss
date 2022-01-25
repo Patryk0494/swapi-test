@@ -67,7 +67,7 @@ a {
   width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.65);
 }
 
 @media (min-width: 640px) {
@@ -181,6 +181,10 @@ a {
   @media (min-width: 1040px) {
     &__props-value {
       font-size: 2rem;
+      &--unknown {
+        color: rgb(131, 131, 131);
+        text-shadow: none;
+      }
     }
   }
 }

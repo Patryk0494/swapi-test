@@ -99,8 +99,10 @@ a {
     font-size: 3rem;
     padding: 1rem 2rem;
     transition: all 0.3s;
-    &:hover {
-      transform: scale(1.1);
+    @media (min-width: 1040px) {
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 }
@@ -196,11 +198,13 @@ a {
   justify-content: space-between;
   gap: 1rem;
   font-size: 1rem;
-  & a {
-    transition: all 0.4s;
-    &:hover {
-      transform: scale(1.1);
-      text-shadow: $text-shadow;
+  @media (min-width: 1040px) {
+    & a {
+      transition: all 0.4s;
+      &:hover {
+        transform: scale(1.1);
+        text-shadow: $text-shadow;
+      }
     }
   }
 }

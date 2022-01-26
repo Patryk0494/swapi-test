@@ -81,7 +81,7 @@ const Planet: NextPage<PlanetProps> = ({ props: { planet } }) => {
 
 Planet.getInitialProps = async ({ query: { id } }) => {
   try {
-    const respone = await fetch(`${API_URL}/planets/${id}`);
+    const respone = await fetch(`${API_URL}planets/${id}`);
     const planet = await respone.json();
     return { props: { planet } };
   } catch (error) {

@@ -8,13 +8,15 @@ import Pagination from "../../components/Pagination";
 const API_URL = "https://swapi.dev/api/";
 
 interface PlanetsComponentProps {
-  props: { data: IPlanets };
+  data: IPlanets;
 }
 
-const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
+const PlanetsPage: NextPage<PlanetsComponentProps> = ({ data }) => {
   const {
     query: { page },
   } = useRouter();
+
+  console.log(data);
 
   const countPage = Math.ceil(data.count / 10);
   const pages = getPagesNumbers(data.count);
@@ -71,21 +73,44 @@ const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
   );
 };
 
-PlanetsPage.getInitialProps = async (ctx: any) => {
+// PlanetsPage.getInitialProps = async (ctx: any) => {
+//   const {
+//     query: { page },
+//   } = ctx;
+
+//   try {
+//     const respone = await fetch(`${API_URL}planets/?page=${page}`);
+//     const data = await respone.json();
+
+//     return {
+//       props: { data },
+//     };
+//   } catch (error) {
+//     return { props: { data: null } };
+//   }
+// };
+
+// export const getStaticPaths = async () => {
+//   const respone = await fetch(`${API_URL}planets`);
+//   const { count } = await respone.json();
+//   const paths = getPagesNumbers(count).map((page) => {
+//     return { params: { planets: "planets", page: page.toString() } };
+//   });
+//   return {
+//     fallback: true,
+//     paths,
+//   };
+// };
+
+export const getServerSideProps = async (ctx: any) => {
   const {
-    query: { page },
+    params: { page },
   } = ctx;
-
-  try {
-    const respone = await fetch(`${API_URL}planets/?page=${page}`);
-    const data = await respone.json();
-
-    return {
-      props: { data },
-    };
-  } catch (error) {
-    return { props: { data: null } };
-  }
+  const respone = await fetch(`${API_URL}planets/?page=${page}`);
+  const data = await respone.json();
+  return {
+    props: { data },
+  };
 };
 
 export default PlanetsPage;

@@ -1,4 +1,4 @@
-export interface PlanetI {
+export interface IPlanet {
   climate: string;
   created: string;
   diameter: string;
@@ -15,9 +15,9 @@ export interface PlanetI {
   url: string;
 }
 
-export interface PlanetsI {
+export interface IPlanets {
   count: number;
   next: string | null;
   previous: string | null;
-  results: PlanetI[];
+  results: IPlanet[];
 }

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { PlanetsI } from "../../model/Planets";
+import { IPlanets } from "../../model/Planets";
 import { useEffect, useState } from "react";
 import getPagesNumbers from "../../utils/getPagesNumbers";
 import { NextPage } from "next";
@@ -8,7 +8,7 @@ import Pagination from "../../components/Pagination";
 const API_URL = "https://swapi.dev/api/";
 
 interface PlanetsComponentProps {
-  props: { data: PlanetsI };
+  props: { data: IPlanets };
 }
 
 const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {

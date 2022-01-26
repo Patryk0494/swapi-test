@@ -1,9 +1,9 @@
 import { NextPage } from "next";
-import { PlanetI } from "../../model/Planets";
+import { IPlanet } from "../../model/Planets";
 
 const API_URL = "https://swapi.dev/api/";
 interface PlanetProps {
-  props: { planet: PlanetI };
+  props: { planet: IPlanet };
 }
 
 const Planet: NextPage<PlanetProps> = ({ props: { planet } }) => {

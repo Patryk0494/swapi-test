@@ -1,4 +1,4 @@
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { IPlanets } from "../../model/Planets";
 import { useEffect, useState } from "react";
 import getPagesNumbers from "../../utils/getPagesNumbers";
@@ -14,7 +14,6 @@ interface PlanetsComponentProps {
 const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
   const {
     query: { page },
-    asPath,
   } = useRouter();
 
   const countPage = Math.ceil(data.count / 10);
@@ -28,18 +27,6 @@ const PlanetsPage: NextPage<PlanetsComponentProps> = ({ props: { data } }) => {
     setNextPage(currentPage + 1);
     setPreviousPage(currentPage - 1);
   }, [currentPage, countPage]);
-
-  // Router.events.on("routeChangeComplete", (url) => {
-  // });
-
-  useEffect(() => {
-    return window.scroll({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }, [currentPage]);
-  console.log(asPath);
 
   const planets = data.results;
 
@@ -90,7 +77,7 @@ PlanetsPage.getInitialProps = async (ctx: any) => {
   } = ctx;
 
   try {
-    const respone = await fetch(`${API_URL}/planets/?page=${page}`);
+    const respone = await fetch(`${API_URL}planets/?page=${page}`);
     const data = await respone.json();
 
     return {
